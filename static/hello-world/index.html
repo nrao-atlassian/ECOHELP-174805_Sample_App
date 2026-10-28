@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hash Nav Repro</title>
+    <style>
+      body { font-family: -apple-system, system-ui, sans-serif; margin: 16px; }
+      button, a { margin: 0 8px 8px 0; }
+      .row { margin-bottom: 12px; }
+      pre { background: #f4f5f7; padding: 8px; max-height: 240px; overflow: auto; font-size: 12px; }
+      dt { font-weight: 600; float: left; clear: left; width: 200px; }
+      dd { margin-left: 210px; }
+    </style>
+  </head>
+  <body>
+    <h1>Hello World: Forge hash navigation repro</h1>
+
+    <div class="row">
+      <strong>In-app navigation</strong><br />
+      <a href="#/a">anchor #/a</a>
+      <a href="#/b">anchor #/b</a>
+      <button data-route="/b">replaceState + hashchange: #/b</button>
+      <button data-route="/c?tab=1">replaceState + hashchange: #/c?tab=1</button>
+      <button id="router-nav">router.navigate(host URL + #/b)</button>
+    </div>
+
+    <div class="row">
+      <label><input type="checkbox" id="bare-mode" /> <strong>Bare mode</strong>: no view.createHistory(), no
+        sync listeners (reload after toggling)</label>
+    </div>
+
+    <div class="row">
+      <strong>Sync switches</strong>
+      <label><input type="checkbox" id="sync-to-host" checked /> iframe → host (history.replace)</label>
+      <label><input type="checkbox" id="sync-from-host" checked /> host → iframe (history.listen)</label>
+    </div>
+
+    <dl id="state"></dl>
+    <pre id="log"></pre>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
